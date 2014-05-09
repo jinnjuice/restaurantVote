@@ -1,6 +1,16 @@
 // Controller for the poll list
 function PollListCtrl($scope, Poll) {
     $scope.polls = Poll.query();
+
+    $scope.destroy = function (poll) {
+        poll.$remove();
+        for (var i in $scope.polls) {
+            if ($scope.polls[i] == poll) {
+                $scope.polls.splice(i, 1)
+            }
+        }
+    };
+
 }
 
 // Controller for an individual poll

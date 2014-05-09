@@ -87,6 +87,18 @@ exports.create = function(req, res) {
     });
 };
 
+// JSON API for deleting a poll
+exports.destroy = function(req, res){
+    var poll = req.Poll
+    poll.remove(function(err){
+        if (err) {
+            res.render('error', {status: 500});
+        }  else {
+            res.jsonp(1);
+        }
+    })
+};
+
 exports.vote = function(socket) {
     socket.on('send:vote', function(data) {
         var ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address.address;
@@ -125,13 +137,3 @@ exports.vote = function(socket) {
     });
 };
 
-exports.destroy = function(req, res){
-    var poll = req.Poll
-    poll.remove(function(err){
-        if (err) {
-            res.render('error', {status: 500});
-        }  else {
-            res.jsonp(1);
-        }
-    })
-};

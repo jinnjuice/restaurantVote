@@ -33,6 +33,7 @@ app.get('/polls/polls', routes.list);
 app.get('/polls/:id', routes.poll);
 app.post('/polls', routes.create);
 app.post('/vote', routes.vote);
+app.del('/polls/:id', routes.destroy)
 
 io.sockets.on('connection', routes.vote);
 

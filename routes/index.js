@@ -124,3 +124,14 @@ exports.vote = function(socket) {
         });
     });
 };
+
+exports.destroy = function(req, res){
+    var poll = req.Poll
+    poll.remove(function(err){
+        if (err) {
+            res.render('error', {status: 500});
+        }  else {
+            res.jsonp(1);
+        }
+    })
+};
